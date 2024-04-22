@@ -1,0 +1,16 @@
+.bg-image
+ {
+  background-image: url('https://i.pinimg.com/originals/35/8c/a0/358ca01c38ccc0cc2954a0fde820485d.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+input::placeholder {
+  color: white;  /* Cambia esto al color que desees */
+}
+
+.prueba{
+  background-color: blue;
+
+}

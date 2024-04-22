@@ -1,0 +1,123 @@
+<div class="relative w-screen p-4 h-screen bg-image  flex flex-col font-serif">
+  <!-- (onChangeViewDate)="onChangeviewActions()" -->
+  <app-header-principal />
+  <div class="text-white text-center font-serif flex flex-col items-center h-screen scale-y-80 mt-10">
+    <div class="w-2/5">
+      <span class="text-5xl font-bold">Reuniones Interactivas para Desarrolladores en Tiempo Real</span>
+    </div>
+    <div class="w-2/5 mt-10 text-gray-200">
+      <span class="text-3xl">RealFlow ofrece reuniones en tiempo real para equipos de desarrollo.
+        Colabora de manera segura y sencilla haciendo los diagramas de
+        secuencia.</span>
+    </div>
+    <section class="flex flex-row w-2/5 min-w-max p-8 gap-8 border-b-4 ">
+      <div (click)="validInitSession()"
+        class="hover:bg-gray-600 rounded-2xl flex flex-row gap-2 p-4 border-4 border-gray-100 min-w-max items-center justify-items-center">
+        <i class="fa-solid fa-handshake fa-lg p-1"></i>
+        <input type="submit" value="Nueva Reunion" class="text-2xl">
+      </div>
+      <div
+        class="hover:bg-gray-600 rounded-2xl flex flex-row gap-2 p-4 border-4 border-gray-100 min-w-max items-center justify-items-center">
+        <i class="fa-solid fa-keyboard fa-lg p-1"></i>
+        <input type="text" class="text-2xl bg-transparent text-white" placeholder="Introduccir un codigo o enlace">
+      </div>
+      <input (click)="validInitSession()" type="submit" value="Unirme" class="text-2xl text-white font-bold">
+    </section>
+    <section class=" w-[35%] mt-7 flex flex-row justify-between  items-center px-7">
+      <i class="fa-solid fa-arrow-left fa-3x"></i>
+      <div class=" mx-auto flex flex-col justify-center items-center gap-3">
+        <img src="/assets/p1.svg" alt="" class="w-10/12 h-10/12">
+        <span class="text-2xl pt-2 font-bold">Obten un enlace para compartir</span>
+        <span>Toca NUEVA REUNION para generar un enlace que puedes compartir con las personas con las que quieres
+          reunirte</span>
+      </div>
+      <i class="fa-solid fa-arrow-right  fa-3x"></i>
+    </section>
+  </div>
+  <!-- OPCIONES DE INICIO SESION O REGISTRO -->
+  <div [ngClass]="{'hidden': !serviceHome.getViewActions() , }"
+    class="gap-4 px-4 py-4 flex flex-col items-center justify-items-center  absolute transition-all bg-gray-800 top-[11%] left-[79%] max-h-min w-[20%]  rounded-2xl border-4 border-white">
+    @if(serviceHome.getIsAuthenticaded()){
+    <div class="text-white flex flex-col items-center gap-4">
+      <span class="text-2xl text-center">Bienvenido !!! espero disfrutes de los
+        Servicios de
+        RealFlow <br>
+        <span class="font-bold">
+          Gracias por confiar en nosotros
+        </span>
+      </span>
+      <div class="hover:bg-gray-600 rounded-2xl p-2 border-4 border-gray-100 max-w-min">
+        <input type="submit" value="Cerrar Sesion" class="text-2xl" (click)="cerrarSesion()" />
+      </div>
+    </div>
+    }@else{
+    <span class="text-3xl text-white">{{titulo}}</span>
+    @if(viewOptionsUser()){
+    <form action="" method="get" class="flex flex-col gap-3 items-center text-white" autocomplete="off"
+      [formGroup]="myFormLogin" (ngSubmit)="onSaveFormLogin()">
+      <div
+        class="hover:bg-gray-600 rounded-2xl flex flex-row gap-2 p-4 border-4 border-gray-100 min-w-max items-center justify-items-center">
+        <i class="fa-solid fa-envelope fa-lg p-1 "></i>
+        <input type="text" class="text-2xl bg-transparent text-white" placeholder="Correo Electronico"
+          autocomplete="new-password" formControlName="email">
+      </div>
+      <div
+        class="hover:bg-gray-600 rounded-2xl flex flex-row gap-2 p-4 border-4 border-gray-100 min-w-max items-center justify-items-center">
+        <i class="fa-solid fa-key fa-lg p-1 "></i>
+        <input type="password" class="text-2xl bg-transparent text-white" placeholder="Password"
+          formControlName="password" autocomplete="off">
+      </div>
+      <div class="hover:bg-gray-600 rounded-2xl p-4 border-4 border-gray-100 max-w-min">
+        <input type="submit" value="Sesion" class="text-2xl">
+      </div>
+    </form>
+    <button class="text-white" (click)="changeViewOptionsUser()">
+      Ir a Registrarse !!!
+    </button>
+    }@else {
+    <form action="" method="get" class="flex flex-col gap-3 items-center text-white" autocomplete="off"
+      [formGroup]="myFormRegister" (ngSubmit)="onSaveFormRegister()">
+      <div
+        class="hover:bg-gray-600 rounded-2xl flex flex-row gap-2 p-4 border-4 border-gray-100 min-w-max items-center justify-items-center">
+        <i class="fa-solid fa-envelope fa-lg p-1 "></i>
+        <input type="text" class="text-2xl bg-transparent text-white" placeholder="Correo Electronico"
+          autocomplete="new-password" formControlName="email">
+      </div>
+      <div
+        class="hover:bg-gray-600 rounded-2xl flex flex-row gap-2 p-4 border-4 border-gray-100 min-w-max items-center justify-items-center">
+        <i class="fa-solid fa-key fa-lg p-1 "></i>
+        <input type="password" class="text-2xl bg-transparent text-white" placeholder="Password"
+          formControlName="password" autocomplete="off">
+      </div>
+      <div
+        class="hover:bg-gray-600 rounded-2xl flex flex-row gap-2 p-4 border-4 border-gray-100 min-w-max items-center justify-items-center">
+        <i class="fa-solid fa-key fa-lg p-1 "></i>
+        <input type="password" class="text-2xl bg-transparent text-white" placeholder="Confirme Password"
+          autocomplete="off" formControlName="confirmPassword">
+      </div>
+      <div class="hover:bg-gray-600 rounded-2xl p-4 border-4 border-gray-100 max-w-min">
+        <input type="submit" value="Registrese" class="text-2xl">
+      </div>
+    </form>
+    <button class="text-white" (click)="changeViewOptionsUser()">
+      Ir a Iniciar Sesion !!!
+    </button>
+    }
+    }
+
+
+  </div>
+  <!-- MENSAJE DE INICIO DE SESION -->
+  <div [ngClass]="{'hidden': !viewMessage(), }"
+    class="h-screen w-screen fixed left-0 top-0 flex justify-center items-center bg-black bg-opacity-50 transition-opacity">
+    <div class="bg-gray-800 rounded-lg shadow-2xl w-90 text-white border-4 border-white">
+      <div class="border-b px-6 py-2 flex flex-row gap-10 items-center text-2xl">
+        <h3 class="font-bold ">{{messageAlert()}}</h3>
+        <div (click)="changeViewMessage(false)">
+          <i class="fa-solid fa-xmark fa-2x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
